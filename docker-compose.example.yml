@@ -1,7 +1,7 @@
 version: "3.3"
 
 networks:
-  web:
+  elasticsearch:
     driver: bridge
     ipam:
       config:
@@ -27,7 +27,7 @@ services:
         soft: 65536
         hard: 65536
     networks:
-      web:
+      elasticsearch:
         ipv4_address: ${NETWORK_ELASTICSEARCH}
 
   kibana:
@@ -37,7 +37,7 @@ services:
     depends_on:
       - elasticsearch
     networks:
-      web:
+      elasticsearch:
         ipv4_address: ${NETWORK_KIBANA}
 
   apm-server:
@@ -48,5 +48,5 @@ services:
       - elasticsearch
       - kibana
     networks:
-      web:
+      elasticsearch:
         ipv4_address: ${NETWORK_APM_SERVER}
